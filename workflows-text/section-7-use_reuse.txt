@@ -71,7 +71,7 @@
 #          path: ./section-7-demo/dist
 #  deploy:
 #    needs: build
-#    uses: ./section-7-demo/.github/workflows/section-7-reusable_workflow.yml
+#    uses: ./section-7-demo/.github/workflows/section-7-reusable_workflow.txt
 #
 #  report:
 #    needs: [lint, deploy]

@@ -1,0 +1,3 @@
+ Make sure Github's access token is set in the repository settings,
+ and that it has  the necessary scope permissions to manage workflows. When creating or updating a workflow file,
+ the token must have the "workflow" scope.

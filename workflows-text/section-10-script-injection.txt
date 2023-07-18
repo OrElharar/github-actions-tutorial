@@ -1,0 +1,41 @@
+# Script Injection is a security vulnerability that allows an attacker to inject
+# malicious code into a software application.
+# The malicious code is then executed by the application.
+
+# Script injection can be handled by sanitizing the input.
+# Either use the input in an environment variable or in custom action.
+# Both of these methods are safe from script injection, because the input is
+# sanitized before it is used.
+
+# When using an action it is important to check the source code of the action
+# to make sure it is safe to use - use a verified action creator.
+
+
+name: Label Issues (Script Injection Example)
+on:
+  issues:
+    types:
+      - opened
+jobs:
+  assign-label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign label
+        run: |
+          issue_title="${{ github.event.issue.title }}"
+          if [[ "$issue_title" == *"bug"* ]]; then
+          echo "Issue is about a bug!"
+          else
+          echo "Issue is not about a bug"
+          fi
+
+# Fixed:
+#     name: Assign label
+#     env:
+#       TITLE: ${{ github.event.issue.title }}
+#     run: |
+#          if [[ "$TITLE" == *"bug"* ]]; then
+#          echo "Issue is about a bug!"
+#          else
+#          echo "Issue is not about a bug"
+#          fi
