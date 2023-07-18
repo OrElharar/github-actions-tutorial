@@ -1,0 +1,110 @@
+## Purpose: Demonstrate how to use custom actions.
+## Why: Custom actions are useful for encapsulating complex logic.
+##      They can be written in any language, and can be run in a container.
+##      They can be used in any workflow, and can be shared across repositories.
+## Types of custom actions:
+##   JavaScript/TypeScript
+##   Docker
+##   Composite - a collection of other actions
+#name: Section 9 Deployment - Custom Actions
+#on:
+#  push:
+#    branches:
+#      - main
+#jobs:
+#  lint:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Get code
+#        uses: actions/checkout@v3
+#      - name: Load & cache dependencies
+#        id: cache-deps
+#        uses: ./.github/actions/cached-deps
+##       For manipulate the action input, use the following syntax:
+##       with:
+##         should-cache: 'false'
+#      - name: Output information
+#        run:  echo "Cache used? ${{ steps.cache-deps.outputs.used-cache }}"
+#      - name: Lint code
+#        run: cd section-9-demo && npm run lint
+#  test:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Get code
+#        uses: actions/checkout@v3
+#      - name: Load & cache dependencies
+#        uses: ./.github/actions/cached-deps
+#      - name: Test code
+#        id: run-tests
+#        run: cd section-9-demo && npm run test
+#      - name: Upload test report
+#        if: failure() && steps.run-tests.outcome == 'failure'
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: test-report
+#          path: test.json
+#  build:
+#    needs: test
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Get code
+#        uses: actions/checkout@v3
+#      - name: Load & cache dependencies
+#        uses: ./.github/actions/cached-deps
+#      - name: Build website
+#        run: cd section-9-demo && npm run build
+#      - name: Upload artifacts
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: dist-files
+#          path: ./section-9-demo/dist
+#  deploy:
+#    permissions:
+#      id-token: write
+#      contents: read
+#    environment: testing
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Get code
+#        uses: actions/checkout@v3
+#      - name: Get build artifacts
+#        uses: actions/download-artifact@v3
+#        with:
+#          name: dist-files
+#          path: ./section-9-demo/dist
+#      - name: Output contents
+#        run: ls
+##      - name: Get AWS permissions
+##        uses: aws-actions/configure-aws-credentials@v1
+##        with:
+##          roles-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+##          aws-region: us-east-1
+#      - name: Deploy site
+#        id: deploy
+#        uses: ./.github/actions/deploy-s3-docker
+#        env:
+#          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#        with:
+#          bucket: hyperactive-github-action-demo
+#          region: us-east-1
+#          dist-folder: ./section-9-demo/dist
+#      - name: Output website URL
+#        run: echo "Website URL - ${{ steps.deploy.outputs.website-url }}"
+#
+## There is a different approach we might prefer instead of using SECRETS
+## to authenticate with AWS.
+## We can use OpenID Connect (OIDC) to authenticate with AWS.
+## OIDC is an open standard for authentication.
+## It allows us to use an identity provider (IdP) to authenticate with AWS.
+## The IdP can be:
+##   AWS SSO
+##   Azure AD
+##   Google
+##   Okta
+##   Ping Identity
+##   Keycloak
+##   Auth0
+##   etc.
+##

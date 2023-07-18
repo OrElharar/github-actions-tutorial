@@ -1,0 +1,29 @@
+#name: Events Demo 1
+#on:
+#  pull_request:
+#    types:
+#      - opened
+#  workflow_dispatch:
+#  push:
+#    branches:
+#      - main
+#      - 'dev-*' # Matches any branch that starts with 'dev-' up to the next '/' (e.g. dev-1, dev-2, dev-3, etc.)
+#      - 'feature/**' # Matches any branch that starts with 'feature/' (e.g. feature/1, feature/2, feature/button/1, etc.)
+#    paths-ignore:
+#      - '.github/workflows/**'
+#jobs:
+#  deploy:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Output event details
+#        run: echo "${{ toJson(github.event) }}"
+#      - name: Get repo code
+#        uses: actions/checkout@v3
+#      - name: Install dependencies
+#        run: cd ./section-4-demo && npm ci
+#      - name: Test
+#        run: cd ./section-4-demo && npm run test
+#      - name: Build project
+#        run: cd ./section-4-demo && npm run build
+#      - name: Deploy
+#        run: echo "Deploying..."
