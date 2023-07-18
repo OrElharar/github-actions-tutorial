@@ -1,0 +1,22 @@
+In the provided YAML file, there are two jobs defined: "test" and "deploy," each with its set of steps.
+The needs keyword is used to create a dependency relationship between the jobs, ensuring that the "deploy" job will
+only run if the "test" job is successful.
+
+Step Relations:
+
+needs: test: This line in the "deploy" job specifies that the "deploy" job depends on the successful completion of
+the "test" job. If the "test" job fails, the "deploy" job won't run. This ensures that code is only deployed if it
+passes the tests.
+
+Optional Step Relations:
+
+Parallel Execution: In certain cases, you might have steps that can run independently of each other.
+To execute steps in parallel, you can create multiple jobs and define them under the jobs key. GitHub Actions will
+automatically run them in parallel when resources are available.
+
+if Conditions: You can also conditionally execute steps based on specific conditions using the if keyword.
+This allows you to customize the workflow based on certain criteria, such as the branch being pushed or the type of
+event triggering the workflow.
+
+These additional features give you the flexibility to create complex workflows that meet the specific requirements of
+your project deployment process.

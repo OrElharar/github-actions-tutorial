@@ -1,0 +1,26 @@
+This script demonstrates a GitHub Actions workflow named "Events Demo 1." It defines a workflow with specific triggers
+and branch patterns. When certain events occur, such as a pull request being opened, a workflow_dispatch event being
+manually triggered, or a push to specific branches (main, dev-* branches, and feature/** branches),
+the workflow will execute a job named "deploy" that performs several steps, including building and deploying a project.
+
+Let's break down some parts of the script:
+
+Branch Patterns:
+
+branches:
+
+main: The workflow is triggered only when there is a push event to the "main" branch.
+
+'dev-*': The workflow is triggered when there is a push event to any branch that starts with "dev-"
+(e.g., dev-1, dev-2, dev-3, etc.). The asterisk (*) acts as a wildcard, matching any characters after "dev-".
+
+'feature/**': The workflow is triggered when there is a push event to any branch that starts with "feature/"
+(e.g., feature/1, feature/2, feature/button/1, etc.). The double asterisk (**) matches any number of characters
+after "feature/".
+
+Paths to Ignore:
+
+paths-ignore: This section specifies paths to ignore during the workflow run. In this case, the workflow will ignore
+changes made to files in the .github/workflows/ directory. This prevents the workflow from being triggered recursively
+if changes to the workflow files themselves are pushed to the repository.
+
