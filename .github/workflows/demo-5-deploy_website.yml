@@ -39,13 +39,13 @@ jobs:
         run: npm run build
       - name: Publish JS filename
         id: publish-js-filename
-        run: find section-5-demo/dist/assets/*.js -type f -execdir echo 'script-filename={}' >> $GITHUB_OUTPUT ';'
+        run: find dist/assets/*.js -type f -execdir echo 'script-filename={}' >> $GITHUB_OUTPUT ';'
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: dist-files
           path: |
-            ./section-5-demo/dist
+            ./dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
