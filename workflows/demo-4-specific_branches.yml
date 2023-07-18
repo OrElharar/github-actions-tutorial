@@ -10,7 +10,7 @@ on:
       - 'dev-*'
       - 'feature/**'
     paths-ignore:
-      - '.github/demo-4-specific_branches.txt/**'
+      - '.github/workflows/**'
 jobs:
   deploy:
     runs-on: ubuntu-latest

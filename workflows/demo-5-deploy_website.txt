@@ -1,0 +1,46 @@
+In this script, there are three jobs defined: "test," "build," and "deploy." The workflow is triggered by a push event
+to the "main" branch. Each job has specific steps, and some steps have been added to handle caching dependencies,
+building, and deploying a website. Let's focus on the added steps in comparison to the previous scripts:
+
+Job: test
+
+The "test" job runs on an "ubuntu-latest" runner and consists of the following steps:
+Cash dependencies: This step uses the actions/cache@v3 action to cache npm dependencies to speed up future
+workflow runs.
+
+Caching the dependencies can significantly reduce the build time if there are no changes to the package-lock.json file.
+
+Lint code: This step runs the linting process using npm run lint. Linting is a process that checks the code for style
+and formatting issues, ensuring it adheres to the defined coding standards.
+
+Job: build
+
+The "build" job runs on an "ubuntu-latest" runner and is dependent on the successful completion of the "test" job
+(needs: test).
+The job defines an output named "script-filename" that will be used in the "deploy" job to retrieve the generated
+filenames.
+
+Publish JS filename: This step identifies JavaScript files generated during the build process and stores their filenames
+in the output variable "script-filename." It uses the find command to locate the JavaScript files in the
+"section-5-demo/dist/assets/" directory and outputs the filenames with the echo command.
+Upload artifacts: This step uses the actions/upload-artifact@v3 action to package and upload the build artifacts to be
+used in the subsequent "deploy" job. The artifacts include the contents of the "./section-5-demo/dist" directory.
+
+Job: deploy
+
+The "deploy" job runs on an "ubuntu-latest" runner and is dependent on the successful completion of the "build" job
+(needs: build).
+
+Get build artifacts: This step uses the actions/download-artifact@v3 action to fetch the artifacts (in this case, the
+"dist-files" artifact) from the "build" job. The artifacts are used to access the website's built files.
+
+Output Contents: This step lists the contents of the current working directory (by running the ls command).
+It's useful for debugging purposes to check the directory's contents.
+Output filename: This step outputs the "script-filename" that was stored in the "build" job's outputs.
+The filename indicates the generated JavaScript files.
+
+Deploy: This step is a placeholder for the actual deployment process. In the provided script, it only echoes
+"Deploying...," but in a real-world scenario, you would perform actions like uploading the built website files to a
+web server or a hosting service.
+These added steps enhance the workflow by introducing caching for faster builds, running linting for code quality
+checks, and handling the deployment process by uploading artifacts and accessing build outputs in the "deploy" job.
