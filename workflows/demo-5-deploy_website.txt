@@ -24,7 +24,7 @@ Publish JS filename: This step identifies JavaScript files generated during the 
 in the output variable "script-filename." It uses the find command to locate the JavaScript files in the
 "section-5-demo/dist/assets/" directory and outputs the filenames with the echo command.
 Upload artifacts: This step uses the actions/upload-artifact@v3 action to package and upload the build artifacts to be
-used in the subsequent "deploy" job. The artifacts include the contents of the "./section-5-demo/dist" directory.
+used in the subsequent "deploy" job. The artifacts include the contents of the "./dist" directory.
 
 Job: deploy
 
