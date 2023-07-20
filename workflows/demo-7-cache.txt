@@ -1,0 +1,68 @@
+Let's go through the .yml file and explain the new concepts introduced:
+
+"hashFiles" is a function provided by GitHub Actions that generates a unique hash based on the contents of the specified
+files. It is typically used to create a cache key when caching dependencies in a workflow.
+
+When you build a project, you often have dependencies (e.g., libraries, packages) that are specified in a file like
+package-lock.json or yarn.lock. These files contain information about the exact versions of the
+dependencies used in your project.
+
+Caching these dependencies can significantly speed up subsequent workflow runs. However, you need a way to determine if
+the dependencies have changed since the last run, so you know whether to use the cached version or reinstall the
+dependencies.
+
+That's where hashFiles comes into play. It reads the specified files (e.g., **/package-lock.json) and calculates a
+unique hash based on their contents. If any of the files change, the hash will be different. If the files remain the
+same, the hash will be the same.
+
+Here's an example scenario:
+
+In the first workflow run, hashFiles('**/package-lock.json') reads the package-lock.json file, calculates the hash
+(let's say it's ABC123), and uses it as the cache key.
+
+In the next workflow run, if the contents of package-lock.json haven't changed, hashFiles will calculate the same hash
+(ABC123) again.
+
+GitHub Actions compares the new hash with the previous cache key. If they match (ABC123), it means the dependencies
+haven't changed, and it uses the cached dependencies, avoiding the need to reinstall them.
+
+If the contents of package-lock.json change (e.g., you updated your dependencies), hashFiles will calculate a new hash
+(let's say DEF456).
+
+GitHub Actions sees that the new hash (DEF456) is different from the previous cache key (ABC123), indicating that the
+dependencies have changed. In this case, it won't use the cached dependencies and will perform a fresh installation.
+
+Remember - GitHub Actions runs workflows on different virtual machines (runners) for each run. When a workflow is
+triggered, GitHub dynamically allocates a runner to execute the workflow. So, if each run uses a different runner, how
+can caching work effectively?
+
+GitHub Actions employs a feature called "cache sharing" to address this challenge. When you use the actions/cache
+action, it caches dependencies in an external service provided by GitHub. This service acts as a shared cache for
+multiple runners. The cache is associated with your repository, not with a specific runner or workflow run.
+
+Here's how the process works:
+During the first run of your workflow, the actions/cache action reads the specified files (e.g., package-lock.json) and
+generates a unique hash (cache key) based on their contents using the hashFiles function.
+
+The actions/cache action attempts to retrieve a cache with the generated cache key from the shared cache service.
+If a cache with that key exists, it is downloaded to the runner for reuse.
+
+If the cache key is not found (i.e., the dependencies are not cached yet or the cache expired), the dependencies are
+installed from scratch, and a new cache is created for future reuse.
+
+On subsequent runs, when a workflow is triggered on a different runner, the actions/cache action will again calculate
+the cache key based on the specified files' contents.
+
+It checks the shared cache service with the cache key. If the cache exists and hasn't expired, it will be downloaded to
+the new runner, avoiding the need to reinstall the dependencies.
+
+By utilizing the shared cache service, GitHub Actions ensures that dependencies can be cached and reused across
+different runners, making the caching process effective even when workflows run on different machines.
+
+Keep in mind that caching is beneficial when you have large or frequently changing dependencies. It can significantly
+speed up workflow execution times and reduce the overall resource consumption on GitHub's infrastructure.
+
+By using hashFiles to create a cache key, you ensure that the cache is only used when the contents of the specified
+files are the same, making your workflows more efficient and avoiding unnecessary installations of dependencies.
+
+
