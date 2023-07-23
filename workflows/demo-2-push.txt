@@ -10,6 +10,7 @@ what actions can accomplish.
 Each action is designed to be self-contained and focused on a specific purpose, which makes them easy to integrate
 and use within workflows. You can use pre-existing actions created by other developers or create your own custom actions
 to suit your specific workflow needs.
+More actions can be found in the GitHub Marketplace - https://github.com/marketplace?type=actions
 
 Now, let's delve into the specific actions/checkout@v3 action mentioned in the provided YAML file:
 
