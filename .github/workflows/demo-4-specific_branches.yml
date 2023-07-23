@@ -1,12 +1,8 @@
 name: Branch Demo Workflow
 on:
-  pull_request:
-    types:
-      - opened
   workflow_dispatch:
   push:
     branches:
-      - main
       - 'dev-*'
       - 'feature/**'
     paths-ignore:
