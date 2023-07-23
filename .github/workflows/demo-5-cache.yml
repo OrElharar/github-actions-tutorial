@@ -1,4 +1,4 @@
-name: Website Deployment
+name: Cache dependencies Demo
 on:
   push:
     branches:
