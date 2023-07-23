@@ -1,4 +1,4 @@
-name: Events Demo 1
+name: Branch Demo Workflow
 on:
   pull_request:
     types:
@@ -27,3 +27,6 @@ jobs:
         run: npm run build
       - name: Deploy
         run: echo "Deploying..."
+
+
+# Dummy comment
