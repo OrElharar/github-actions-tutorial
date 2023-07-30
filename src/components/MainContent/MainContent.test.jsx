@@ -22,3 +22,10 @@ describe('MainContent', () => {
     expect(screen.getByTestId('help-area')).toBeInTheDocument();
   });
 });
+
+// Dummy test that demonstrate the CI/CD pipeline
+// describe('Dummy test that check env variables', () => {
+//     it('should return the correct value of the env variable', () => {
+//         expect(process.env.REACT_APP_TEST_ENV_VAR).toBe('test');
+//     });
+// });
