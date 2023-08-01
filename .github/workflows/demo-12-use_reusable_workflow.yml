@@ -22,29 +22,7 @@ jobs:
         run: npm run lint
 
   test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Cache dependencies (test)
-        id: cache-test
-        uses: actions/cache@v3
-        with:
-          path: ./node_modules
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Install dependencies
-        if: steps.cache-test.outputs.cache-hit != 'true'
-        run: npm ci
-      - name: Test code
-        id: run-tests
-        run: npm run test
-      - name: Upload test report
-        if: failure() && steps.run-tests.outcome == 'failure'
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-report
-          path: ./test.json
-
+    uses: ./.github/workflows/demo-11-reusable_test_workflow.yml
   build:
     needs: test
     runs-on: ubuntu-latest

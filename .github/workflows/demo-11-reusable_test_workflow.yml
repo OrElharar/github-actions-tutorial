@@ -1,0 +1,33 @@
+name: Reusable Test
+on:
+  workflow_call:
+    inputs:
+      test-command:
+        description: 'The command to run tests'
+        required: false
+        default: 'npm run test'
+        type: string
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Cache dependencies (test)
+        id: cache-test
+        uses: actions/cache@v3
+        with:
+          path: ./node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        if: steps.cache-test.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Test code
+        id: run-tests
+        run: ${{ inputs.test-command }}
+      - name: Upload test report
+        if: failure() && steps.run-tests.outcome == 'failure'
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: ./test.json
