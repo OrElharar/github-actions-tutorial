@@ -83,10 +83,12 @@ jobs:
     if: failure()
     runs-on: ubuntu-latest
     steps:
-      - name: Output Information
-        run: |
-          echo "Something went wrong"
-          echo "{{ github }}"
+      - name: Download test report
+        uses: actions/download-artifact@v3
+        with:
+          name: test-report
+      - name: Output test report
+        run: cat ./test.json
   report-success:
     needs: [lint, deploy]
     if: success()
