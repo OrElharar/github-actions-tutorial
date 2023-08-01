@@ -27,6 +27,8 @@ const config = {
   use: {
     baseURL: `http://127.0.0.1:${process.env.PORT}`,
   },
+  /* Test files to ignore */
+  testIgnore: '**/*.jsx',
 };
 
 export default config;
