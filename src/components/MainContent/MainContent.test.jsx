@@ -21,13 +21,5 @@ describe('MainContent', () => {
     await userEvent.click(button);
     expect(screen.getByTestId('help-area')).toBeInTheDocument();
   });
-
-  it('should cause an error', async () => {
-    render(<MainContent />);
-
-    const button = screen.getByRole('button');
-    await userEvent.click(button);
-    expect(screen.getByTestId('help-area-dummy-error')).toBeInTheDocument();
-  });
 });
 
