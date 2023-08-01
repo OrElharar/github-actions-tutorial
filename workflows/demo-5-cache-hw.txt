@@ -1,0 +1,8 @@
+Use:
+cache
+multi jobs
+build: needs ---> test
+deploy: needs ---> build
+
+if there is a failure - print - Something went wrong
+if all succeeded - print - Workflow ended Successfully
