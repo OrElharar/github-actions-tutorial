@@ -25,7 +25,7 @@ on:
       - dev
 env:
   MONGODB_DB_NAME: ${{ secrets.MONGODB_DB_NAME }}
-  MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+  MONGODB_USERNAME: ${{ secrets.MONGODB_USER_NAME }}
   MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
   MONGODB_CLUSTER_ADDRESS: ${{ secrets.MONGODB_CLUSTER_ADDRESS }}
   PORT: ${{ secrets.PORT }}

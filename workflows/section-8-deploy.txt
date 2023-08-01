@@ -18,7 +18,7 @@
 #      MONGODB_CLUSTER_ADDRESS: mongodb
 ##     If not using container:
 ##     MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017
-#      MONGODB_USERNAME: root
+#      MONGODB_USER_NAME: root
 #      MONGODB_PASSWORD: example
 #      PORT: 8080
 #    services:
@@ -46,7 +46,7 @@
 #        run: cd section-8-demo && npm test
 #      - name: Output information
 #        run: |
-#          echo "MONGODB_USERNAME: $MONGODB_USERNAME"
+#          echo "MONGODB_USER_NAME: MONGODB_USER_NAME"
 #  deploy:
 #    needs: test
 #    runs-on: ubuntu-latest
@@ -56,5 +56,5 @@
 #          PORT: 3000
 #        run: |
 #          echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
-#          echo "MONGODB_USERNAME: $MONGODB_USERNAME"
+#          echo "MONGODB_USER_NAME: MONGODB_USER_NAME"
 #          echo "${{ env.PORT }}"
