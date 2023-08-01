@@ -26,8 +26,8 @@ jobs:
         run: npm ci
       - name: Run server in background
         run: npm run start-server &
-      - name: Wait for server to be ready
-        run: npx wait-on http://127.0.0.1:${{ env.PORT }}
+      - name: Give the server time to be ready
+        run: sleep 10
       - name: Run tests
         run: npm run test-server
       - name: Output information
