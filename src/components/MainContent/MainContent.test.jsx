@@ -21,13 +21,13 @@ describe('MainContent', () => {
     await userEvent.click(button);
     expect(screen.getByTestId('help-area')).toBeInTheDocument();
   });
+
+  it('should cause an error', async () => {
+    render(<MainContent />);
+
+    const button = screen.getByRole('button');
+    await userEvent.click(button);
+    expect(screen.getByTestId('help-area-dummy-error')).toBeInTheDocument();
+  });
 });
 
-// Dummy test that demonstrate the CI/CD pipeline
-// describe('Dummy test that check env variables', () => {
-//     it('should return the correct value of the env variable', () => {
-//         expect(process.env.REACT_APP_TEST_ENV_VAR).toBe('test');
-//     });
-// });
-
-// Dummy change push
