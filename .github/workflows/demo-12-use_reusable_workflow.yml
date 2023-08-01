@@ -1,4 +1,4 @@
-  name: Use Reusable Workflow
+name: Use Reusable Workflow
 on:
   push:
     branches:
