@@ -3,7 +3,7 @@
  * @type {import('@playwright/test').PlaywrightTestConfig}
  */
 const config = {
-  testDir: './tests',
+  testDir: './server/tests',
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
   expect: {
@@ -28,7 +28,7 @@ const config = {
     baseURL: `http://127.0.0.1:${process.env.PORT}`,
   },
   /* Test files to ignore */
-  testIgnore: '**/*.jsx',
+  testIgnore: ['**/*.jsx'],
 };
 
 export default config;
