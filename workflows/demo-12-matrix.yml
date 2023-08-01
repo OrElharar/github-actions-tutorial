@@ -14,6 +14,10 @@ jobs:
             os: ubuntu-latest
     runs-on: ubuntu-latest
     steps:
+      - name: Print Matrix Values
+        run: |
+          echo "Node Version - ${{ matrix.node-version }}"
+          echo "OS - ${{ matrix.os }}"
       - name: Get Code
         uses: actions/checkout@v3
       - name: Install NodeJS
