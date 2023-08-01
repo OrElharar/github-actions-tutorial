@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "vitest": "vitest run --testMatch '!**/server/**/*'",
     "dev-server": "env-cmd -f ./config/dev.env node ./server/app.js",
+    "test-dev-server": "env-cmd -f ./config/dev.env npx playwright test",
     "start-server": "node ./server/app.js",
     "test-server": "npx playwright test"
   },
