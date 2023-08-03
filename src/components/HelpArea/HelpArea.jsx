@@ -14,6 +14,6 @@ function HelpArea({helpItems}) {
 
 HelpArea.propTypes = {
     helpItems: array
-}
+};
 
 export default HelpArea;
