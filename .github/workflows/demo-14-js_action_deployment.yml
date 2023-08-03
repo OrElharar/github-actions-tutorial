@@ -12,6 +12,6 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16' # Or the version compatible with your action
+          node-version: '16'
       - name: Run custom Action
-        uses: ./.github/actions/deploy-s3-js
+        uses: ./.github/actions/deploy-s3-js/action.yml
