@@ -22,6 +22,6 @@ runs:
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true' || inputs.should-cache != 'true'
       run: |
-        cd section-9-demo && npm ci
+        npm ci
         echo "::set-output name=cache::'${{ inputs.caching }}'"
       shell: bash
