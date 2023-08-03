@@ -57,3 +57,5 @@ jobs:
           bucket: hyperactive-github-action-demo
           region: us-east-1
           dist-folder: ./dist
+      - name: Output Website URL
+        run: echo "Website URL - ${{ steps.deploy.outputs.website-url }}"
