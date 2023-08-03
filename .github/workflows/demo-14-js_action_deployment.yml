@@ -9,5 +9,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16' # Or the version compatible with your action
       - name: Run custom Action
         uses: ./.github/actions/deploy-s3-js
