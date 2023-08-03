@@ -39,13 +39,13 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Get code
+        uses: actions/checkout@v3
       - name: Get build artifacts
         uses: actions/download-artifact@v3
         with:
           name: dist-files
           path: ./dist
-      - name: Get code
-        uses: actions/checkout@v3
       - name: Check contents of the working directory
         run: ls -la
       - name: Run custom Action
