@@ -23,7 +23,7 @@ runs:
       if: steps.cache.outputs.cache-hit != 'true' || inputs.should-cache != 'true'
       run: |
         npm ci
-        echo "::set-output name=cache::'${{ inputs.caching }}'"
+        echo "::set-output name=cache::'${{ inputs.should-cache }}'"
       shell: bash
     - name: Log dependencies status
       run: echo "Dependencies downloaded - ${{ steps.install.outputs.cache-hit == 'false' }}"
