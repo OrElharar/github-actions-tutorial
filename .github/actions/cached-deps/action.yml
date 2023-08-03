@@ -25,3 +25,6 @@ runs:
         npm ci
         echo "::set-output name=cache::'${{ inputs.caching }}'"
       shell: bash
+    - name: Log dependencies status
+      run: echo "Dependencies downloaded - ${{ steps.install.outputs.cache-hit == 'false' }}"
+      shell: bash
