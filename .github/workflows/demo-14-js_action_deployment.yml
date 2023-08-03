@@ -48,7 +48,8 @@ jobs:
           path: ./dist
       - name: Check contents of the working directory
         run: ls -la
-      - name: Run custom Action
+      - name: Run Deploy Action
+        id: deploy
         uses: ./.github/actions/deploy-s3-js
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
