@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "lint": "eslint --ext .jsx --fix src",
-    "build-server": "vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "dev-server": "env-cmd -f ./config/dev.env node ./server/app.js",

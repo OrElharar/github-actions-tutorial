@@ -24,6 +24,8 @@ jobs:
       - name: Load & cache dependencies
         id: cache-deps
         uses: ./.github/actions/cached-deps
+        with:
+          should-cache: false
       - name: Output info
         run: echo "Cache used? -  ${{ steps.cache-deps.outputs.has-used-cache }}"
       - name: Build website
