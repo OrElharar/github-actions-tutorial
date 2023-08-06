@@ -26,6 +26,7 @@ runs:
     - name: Log dependencies status
       id: log
       run: echo "Dependencies downloaded - ${{ steps.install.outputs.cache-hit == 'false' }}"
+      shell: bash
     - name: Set Output info
       id: set-output
       run: echo "::set-output name=has-used-cache::${{ steps.log.outputs.cache }}"
