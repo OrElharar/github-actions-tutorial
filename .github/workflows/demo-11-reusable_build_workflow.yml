@@ -3,7 +3,7 @@ on:
   workflow_call:
     inputs:
       build-command:
-        description: 'The command to run tests'
+        description: 'The command to run build'
         required: false
         default: 'npm run build'
         type: string
