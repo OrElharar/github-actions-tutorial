@@ -26,29 +26,12 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
-    steps:
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Cache dependencies (build)
-        id: cache-build
-        uses: actions/cache@v3
-        with:
-          path: ./node_modules
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Install dependencies
-        if: steps.cache-build.outputs.cache-hit != 'true'
-        run: npm ci
-      - name: Build website
-        id: build-website
-        run: npm run build
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: dist-files
-          path: ./dist
+    uses: ./.github/workflows/demo-11-reusable_build_workflow.yml
+    with:
+      build-command: 'npm run build-server'
   deploy:
     needs: build
-    uses: ./.github/workflows/demo-11-reusable_build_workflow.yml
+    uses: ./.github/workflows/demo-11-reusable_deploy_workflow.yml
   report:
     needs: [lint, deploy]
     if: failure()
