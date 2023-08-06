@@ -20,12 +20,10 @@ jobs:
         run: npm ci
       - name: Lint code
         run: npm run lint
-
   test:
     uses: ./.github/workflows/demo-11-reusable_test_workflow.yml
   build:
     needs: test
-    runs-on: ubuntu-latest
     uses: ./.github/workflows/demo-11-reusable_build_workflow.yml
     with:
       build-command: 'npm run build-server'
