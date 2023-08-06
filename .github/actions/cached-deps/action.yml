@@ -29,5 +29,5 @@ runs:
       shell: bash
     - name: Set Output info
       id: set-output
-      run: echo "::set-output name=has-used-cache::${{ steps.log.outputs.cache }}"
+      run: echo "::set-output name=has-used-cache::${{ steps.cache.outputs.cache-hit == 'true' || inputs.should-cache != 'true' }}"
       shell: bash
